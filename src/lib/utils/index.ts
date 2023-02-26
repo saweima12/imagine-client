@@ -1,0 +1,3 @@
+export {
+    splitCookieString
+} from './cookie'
