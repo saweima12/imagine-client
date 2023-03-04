@@ -20,7 +20,7 @@ const CustomRouter = createHashRouter([
             const filePtn = /\..+$/;
             if (!filePtn.test(url.pathname)) {
                 if (url.pathname === "/") {
-                    return redirect("/dashboard");
+                    return redirect("/file");
                 }
 
                 const isAuthorized = await checkUserAuthorized();
@@ -35,10 +35,6 @@ const CustomRouter = createHashRouter([
             {
                 path: "/file/*",
                 element: <FilePage />,
-            },
-            {
-                path: "/dashboard/",
-                element: <DashBoardPage />
             }
         ]
     },
