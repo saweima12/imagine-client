@@ -1,2 +1,25 @@
-@import "login"
+
+$screen-md = 768px
+$screen-lg = 1024px
+
+
+
 @import "font"
+@import "nav"
+@import "hamburger"
+
+@import "login"
+@import "admin"
+
+:root 
+    --drawer-width: 20rem
+    --drawer-mobile-width: calc(var(--drawer-width)*0.8)
+
+.dark 
+    --bg-color: #21252b
+    --border: rgba(175,175,175,0.15)
+    --navbar: #2f333d
+    --mask-bg: rgba(175,175,175, 0.15)
+    --menu-btn: #bbb
+    --text: #abb2bf
+    --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif
