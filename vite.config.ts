@@ -13,7 +13,25 @@ export default defineConfig({
       devOptions: {
         enabled: true
       },
-      injectRegister: 'auto'
+      injectRegister: 'auto',
+      manifest: {
+        name: "Imagine Backend App",
+        short_name: "Imagine",
+        description: "Imagine Backend View",
+        theme_color: "#ffffff",
+        icons: [
+          {
+            src: "pwa-192x192.png",
+            sizes: "192x192",
+            type: "image/png"
+          },
+          {
+            src: "pwa-512x512.png",
+            sizes: "512x512",
+            type: "image/png"
+          }
+        ]
+      }
     })
   ],
 })
