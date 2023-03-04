@@ -3,6 +3,13 @@ export function setCookie(key: string, value: string) {
     document.cookie = cookie_str;
 }  
 
+export function setExpireCookie(key: string) {
+    let date = new Date(0);
+    const cookie_str = `${key}=; expires=${date.toUTCString()}; path=/`
+    document.cookie = cookie_str;
+}
+
+
 export function splitCookieString(cookie_str: string): Record<string, string> {
     // get cookie string & split by ;
     const parts = cookie_str.split(";");

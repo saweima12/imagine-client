@@ -1,10 +1,9 @@
 import { redirect } from 'react-router'
 import { createHashRouter } from 'react-router-dom';
 
-import { checkUserAuthorized } from 'lib/action/cookie';
+import { checkUserAuthorized } from 'lib/action/user';
 
 import AdminLayouts from 'layouts/AdminLayout';
-
 import DashBoardPage from 'pages/Dashboard';
 import FilePage from 'pages/File'
 import LoginPage from 'pages/Login';
@@ -15,13 +14,19 @@ const CustomRouter = createHashRouter([
         element: <AdminLayouts />,
         loader: async (ctx) => {
 
-            if (!checkUserAuthorized()) {
-                return redirect("/login");
-            }
-
             const url = new URL(ctx.request.url);
-            if (url.pathname === "/") {
-                return redirect("/dashboard");
+            
+            // check url didn't go to static file.
+            const filePtn = /\..+$/;
+            if (!filePtn.test(url.pathname)) {
+                if (url.pathname === "/") {
+                    return redirect("/dashboard");
+                }
+
+                const isAuthorized = await checkUserAuthorized();
+                if (!isAuthorized) {
+                    return redirect("/login");
+                }
             }
 
             return null;
@@ -29,7 +34,7 @@ const CustomRouter = createHashRouter([
         children: [
             {
                 path: "/file/*",
-                element: <FilePage />
+                element: <FilePage />,
             },
             {
                 path: "/dashboard/",
@@ -41,9 +46,12 @@ const CustomRouter = createHashRouter([
         path: "/login",
         element: <LoginPage/>,
         loader: async () => {
-            if (checkUserAuthorized()) {
+
+            const isAuthorized = await checkUserAuthorized();
+            if (isAuthorized) {
                 return redirect("/");
             } 
+            
             return null;
         }
     }

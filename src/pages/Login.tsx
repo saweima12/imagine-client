@@ -2,11 +2,9 @@ import React from 'react'
 import { useNavigate } from 'react-router';
 import { FaUserAlt, FaKey } from 'react-icons/fa'
 
-import { userLogin } from 'lib/api';
-import { setCookie } from 'lib/utils/cookie';
-import { COOKIE_USER, COOKIE_PWD} from 'types';
+import { userLogin } from 'lib/action/user';
 
-const LoginView = () => {
+const page = () => {
     let navigate = useNavigate()
     const [username, setUsername] = React.useState("");
     const [password, setPassword] = React.useState("");
@@ -20,11 +18,10 @@ const LoginView = () => {
         const result = await userLogin(username, password);
 
         if (result.isOK()) {
-            setCookie(COOKIE_USER, username);
-            setCookie(COOKIE_PWD, result.data?.token || "");
             navigate("/");
+        } else {
+            // TODO: alterMessage 
         }
-
     };
 
 
@@ -64,4 +61,4 @@ const LoginView = () => {
     )
 }
 
-export default LoginView;
+export default page;
