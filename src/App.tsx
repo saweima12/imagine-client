@@ -1,15 +1,19 @@
-import { useMemo, useState } from 'react';
 import { RouterProvider } from 'react-router-dom';
-import reactLogo from './assets/react.svg';
 
 import './styles/app.styl';
 import customRouter from './router';
+import { QueryClient, QueryClientProvider } from 'react-query';
+
+const queryClient = new QueryClient();
 
 function App() {
-    
+
+
   return (
     <div className="App">
-      <RouterProvider router={customRouter} />
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={customRouter} />
+      </QueryClientProvider>
     </div>
   )
 }
