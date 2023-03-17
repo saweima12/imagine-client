@@ -1,10 +1,10 @@
-import { EventCode, EventEmitter } from "lib/utils/event"
+import { navMenuStateStore } from "layouts/AdminLayout/store"
 
 export default () => {
 
     const onClick = () => {
         // dispatch close menu event.
-        EventEmitter.dispatch(EventCode.toggleDrawer, false);
+        navMenuStateStore.setState(false);
     }
 
     return <div className="menu-mask" onClick={onClick}></div>

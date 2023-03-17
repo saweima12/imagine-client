@@ -1,20 +1,22 @@
-import { useState } from "react"
+import { useState, useSyncExternalStore } from "react"
 import { clsx } from 'clsx';
-import { EventCode, EventEmitter } from "lib/utils/event";
+import { navMenuStateStore } from "layouts/AdminLayout/store";
 
 
 export default () => {
 
-    const [toggle, setToggle] = useState(false);
+    const navMenuState = useSyncExternalStore(
+        navMenuStateStore.subscribe, 
+        navMenuStateStore.getState
+    );
 
     const onToggle = () => {
-        const newState = !toggle;
-        EventEmitter.dispatch(EventCode.toggleDrawer, newState);
+        const newState = !navMenuState;
+        navMenuStateStore.setState(newState);
     }
-    EventEmitter.subscribe(EventCode.toggleDrawer, (state: boolean) => setToggle(state))
 
     return <div 
-                className={clsx("menu-button-wrapper", toggle && "toggle")}
+                className={clsx("menu-button-wrapper", navMenuState && "toggle")}
                 onClick={onToggle}
             >
         <div className="menu-button-container">

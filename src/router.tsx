@@ -1,17 +1,16 @@
 import { redirect } from 'react-router'
 import { createHashRouter } from 'react-router-dom';
 
-import { checkUserAuthorized } from 'lib/action/user';
+import { checkUserAuthorized, userLogout } from 'lib/action/user';
 
-import AdminLayouts from 'layouts/AdminLayout';
-import DashBoardPage from 'pages/Dashboard';
+import AdminLayout from 'layouts/AdminLayout';
 import FilePage from 'pages/File'
 import LoginPage from 'pages/Login';
 
 const CustomRouter = createHashRouter([
     {
         path: "/",
-        element: <AdminLayouts />,
+        element: <AdminLayout />,
         loader: async (ctx) => {
 
             const url = new URL(ctx.request.url);
@@ -49,6 +48,15 @@ const CustomRouter = createHashRouter([
             } 
             
             return null;
+        }
+    },
+    {
+        path: "/signout",
+        loader: async () => {
+            // Remvoe cookie
+            userLogout();
+
+            return redirect("/login");
         }
     }
 ]);
