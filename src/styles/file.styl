@@ -1,0 +1,79 @@
+.filepage-wrapper
+    width: 100%;
+
+.filepage-container
+    width: clamp(350px, 100%, 1024px)
+    padding: 0 1rem;
+
+
+.filelist-view
+    box-sizing: border-box;
+    border: 1px solid var(--border)
+    border-radius: .2rem
+    overflow: hidden
+    width: clamp(320px, 100%, 1024px)
+
+    .row
+        display: flex;
+        padding: .5rem 0;
+
+        & > *
+            display: flex;
+
+        a
+            border-bottom: 1px solid transparent
+
+            &:hover
+                border-color: var(--border-hover)
+
+        .multi-check
+            flex 0 1 40px;
+            margin-left: 1rem;
+
+        .file-name
+            flex: 0 1 380px;
+            align-items: center;
+            flex-grow: 1;
+
+        .lastmod
+            display: none;
+            flex 0 1 200px;
+            justify-content: center;
+        
+        .size
+            flex 0 1 100px;
+            justify-content: right;
+            text-align: right;
+            margin-right: 1rem;
+
+
+.filelist-head, .filelist-body
+    width: 100%;
+
+.filelist-head
+    background: var(--filelist-head-bg);
+    width: 100%;
+    font-weight: 600;
+
+
+.filelist-body
+
+    .row
+        border-bottom: 1px solid var(--border)
+
+        &:hover
+            background: var(--filelist-row-hover)
+
+
+
+
+@media screen and (min-width: $screen-md) 
+    .filelist-view
+        .row
+            .lastmod
+                display: flex
+
+
+@media screen and (min-width: $screen-lg) 
+    .filepage-container
+        margin: 0 auto;

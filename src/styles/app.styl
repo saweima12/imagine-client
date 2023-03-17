@@ -1,25 +1,28 @@
-
 $screen-md = 768px
 $screen-lg = 1024px
-
-
 
 @import "font"
 @import "nav"
 @import "hamburger"
+@import "widget"
 
 @import "login"
 @import "admin"
+@import "file"
 
 :root 
-    --drawer-width: 20rem
-    --drawer-mobile-width: calc(var(--drawer-width)*0.8)
+    --navbar-height: 3.5rem;
+    --drawer-width: 16rem;
+    --drawer-mobile-width: calc(var(--drawer-width)*0.8);
 
 .dark 
-    --bg-color: #21252b
-    --border: rgba(175,175,175,0.15)
-    --navbar: #2f333d
-    --mask-bg: rgba(175,175,175, 0.15)
-    --menu-btn: #bbb
-    --text: #abb2bf
-    --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif
+    --bg-color: #21252b;
+    --border: rgba(175,175,175,0.15);
+    --border-hover: rgba(175,175,175, 0.6);
+    --navbar: #2f333d;
+    --mask-bg: rgba(175,175,175, 0.15);
+    --menu-btn: #bbb;
+    --text: #abb2bf;
+    --filelist-head-bg: #161b22;
+    --filelist-row-hover: #282d36;
+    --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;

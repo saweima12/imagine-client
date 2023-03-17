@@ -6,7 +6,22 @@
     border-bottom: 1px;
     box-shadow: rgba(0, 0, 0, 0.25) 0px -2px 10px;
     width: 100%
+    height: var(--navbar-height)
     transition: position .3s    
+
+
+.navbar-container
+    width: 100%;
+    color: var(--text)
+    font-size: 1.1rem
+    font-weight: 700
+    font-family: var(--font-family)
+
+    .icon 
+        font-size: 25px
+
+    a:hover
+        color: #eee
 
 .nav-menu
     position: fixed
@@ -15,15 +30,16 @@
     bottom: 0
     background: var(--bg-color)
     border-right: 1px solid var(--border)
-    width: var(--drawer-mobile-width)
-    transform: translateX(calc(var(--drawer-mobile-width) * -1))
+    width: var(--drawer-width)
+    transform: translateX(calc(var(--drawer-width) * -1))
     transition: transform .3s
 
 .nav-list
-    color: var(--text)
-    font-size: 1.1rem
-    font-weight: 700
-    font-family: var(--font-family)
+
+    .nav-item
+        align-items: center;
+        padding: 0 1rem;
+
 
 .menu-mask
     position: fixed
@@ -42,4 +58,5 @@
 
 @media screen and (min-width: $screen-lg) 
     .nav-menu
+        width: var(--drawer-width)
         transform: none
