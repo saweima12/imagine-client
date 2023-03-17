@@ -1,4 +1,4 @@
-import { setCookie, setExpireCookie, splitCookieString } from "lib/utils";
+import { setCookie, setExpireCookie } from "lib/utils";
 import { getAuthInstance, authenticateLogin, checkAuthorized } from 'lib/api';
 import { COOKIE_USER, COOKIE_PWD, ActionResult} from 'lib/types';
 import { getUserInfo } from "lib/utils/user";
@@ -14,6 +14,11 @@ export async function userLogin(username: string, password:string): Promise<Acti
     }
 
     return result;
+}
+
+export function userLogout() {
+    setExpireCookie(COOKIE_USER);
+    setExpireCookie(COOKIE_PWD);
 }
 
 export async function checkUserAuthorized(): Promise<boolean> {

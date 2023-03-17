@@ -6,5 +6,6 @@ export {
 } from './response';
 
 export type {
-    SysInfo
+    SysInfo,
+    DiskInfo
 } from './sysinfo'

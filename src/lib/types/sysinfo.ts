@@ -5,5 +5,5 @@ export interface DiskInfo {
 }
 
 export interface SysInfo{
-    disk: DiskInfo
+    disk?: DiskInfo
 }

@@ -3,11 +3,10 @@ import axios, { AxiosInstance } from 'axios';
 import { ActionResult  } from 'lib/types';
 import type { SysInfo } from 'lib/types'
 
-import { splitCookieString } from 'lib/utils/cookie';
 import { AuthResponse } from 'lib/types/response';
 
 const basicConfig = {
-    baseURL: "http://localhost:8001/api/v1",
+    baseURL: import.meta.env["VITE_API_URI"],
     timeout: 1000,
     headers: {
         "Content-Type": "application/json",
