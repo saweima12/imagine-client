@@ -1,3 +1,4 @@
+import type { LegacyRef } from 'react';
 import { formatSizeString } from "lib/utils";
 
 import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react"
@@ -43,7 +44,7 @@ export default () => {
             <p>{percent}%</p>
         </div>
 
-        <div className="progress-max" ref={maxProgressElm}></div>
+        <div className="progress-max" ref={maxProgressElm as LegacyRef<HTMLDivElement>}></div>
         <div className="progress-value" style={{"width": curProgressWidth}}></div>
     </div>
 }

@@ -2,16 +2,15 @@
     width: 100%;
 
 .filepage-container
-    width: clamp(350px, 100%, 1024px)
-    padding: 0 1rem;
-
+    width: clamp(280px, 100%, 1024px)
+    padding: 0 .5rem;
 
 .filelist-view
     box-sizing: border-box;
-    border: 1px solid var(--border)
-    border-radius: .2rem
-    overflow: hidden
-    width: clamp(320px, 100%, 1024px)
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: .2rem;
+    width: clamp(280px, 100%, 1024px);
 
     .row
         display: flex;
@@ -21,10 +20,10 @@
             display: flex;
 
         a
-            border-bottom: 1px solid transparent
+            border-bottom: 1px solid transparent;
 
             &:hover
-                border-color: var(--border-hover)
+                border-color: var(--border-hover);
 
         .multi-check
             flex 0 1 40px;
@@ -57,14 +56,34 @@
 
 
 .filelist-body
-
     .row
-        border-bottom: 1px solid var(--border)
+        border-bottom: 1px solid var(--border);
 
         &:hover
-            background: var(--filelist-row-hover)
+            background: var(--filelist-row-hover);
 
 
+.breadcrumb-container
+    background: var(--filelist-head-bg);
+    box-sizing: border-box;
+    border: 1px solid var(--border);
+    border-radius: .2rem;
+    height: 2.2rem;
+
+    .back-btn
+        background: var(--bg-color)
+        border: 1px solid var(--border);
+        padding: .5rem;
+        margin-right: 1rem;
+
+        &:hover
+            background-color: var(--filelist-row-hover);
+
+    .path-field
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        text-indent: 0.5rem;
 
 
 @media screen and (min-width: $screen-md) 

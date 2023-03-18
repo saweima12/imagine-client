@@ -13,6 +13,7 @@ export default ({ curPath, list }: { curPath: string, list: FileStat[] } ) => {
     // rule: folder first
     const fileList = useMemo(() => {
         let temp = list.filter(item => item.filename != curPath);
+
         const getPriority = (type: string) => (type == "directory" ? 1: 0);
         return temp.slice().sort((a, b) =>{
             return getPriority(b.type) - getPriority(a.type);
@@ -47,7 +48,9 @@ export default ({ curPath, list }: { curPath: string, list: FileStat[] } ) => {
                 <div className="multi-check">
                     <input type="checkbox" 
                         onChange={onChangeCheckAll}
-                        checked={checkedList.length == fileList.length}
+                        checked={
+                            checkedList.length == fileList.length && fileList.length > 0
+                        }
                     ></input>
                 </div>
 

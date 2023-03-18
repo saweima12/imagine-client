@@ -1,4 +1,5 @@
 import type { FileStat } from 'webdav';
+import log from 'loglevel';
 import { useMemo, useState } from 'react';
 import { useLocation } from 'react-router';
 import { useQuery } from 'react-query';
@@ -7,10 +8,11 @@ import action from 'lib/action/webdav';
 import { getUserInfo } from 'lib/utils/user';
 import { getClient } from 'lib/webdav';
 
-import { checkedListStore, directoryPathStore } from './store';
-import FileList from './component/FileList';
+import { checkedListStore, filePageInfoStore } from './store';
+import FileListGrid from './component/FileListGrid';
 import Toolbar from './component/Toolbar';
 import UploadBox from './component/UploadBox';
+import Breadcrumb from './component/Breadcrumb';
 
 
 const page = () => {
@@ -26,25 +28,27 @@ const page = () => {
         const path = location.pathname.replace(/^\/file/, "");
         return path ? path : "/";
     }, [location.pathname])
-    const davPath = useMemo(() => `/webdav${curPath}`, [curPath])
     // declare state
-    const [fileList, setFileList] = useState<FileStat[]>();
+    const [remoteList, setRemoteList] = useState<FileStat[]>();
+    const [uploadQueue, setUploadQueue] = useState<string[]>();
 
     // get directory content from webdav.
-    const load = async () => await action.getDirectoryContents(client, davPath);
+    const load = async () => await action.getDirectoryContents(client, curPath);
     const refreshList = () => checkedListStore.setState([]);
 
     // Query directory content from webdav.
-    const { isLoading } = useQuery(["loadDirectoryContent", davPath], load, {
+    const { isLoading } = useQuery(["loadDirectoryContent", curPath], load, {
         onSuccess: (result) => { 
-            setFileList(result.data);
+            log.debug(result);
+
+            setRemoteList(result.data);
             // reset checkedList
             refreshList();
 
             // set filepage store.
-            directoryPathStore.setState({
+            filePageInfoStore.setState({
                 curPath: curPath,
-                davPath: davPath,
+                davClient: client
             })
             
         },
@@ -59,8 +63,9 @@ const page = () => {
 
     return <div className="filepage-wrapper">
         <div className="filepage-container">
+            <Breadcrumb curPath={curPath}/>
             <Toolbar />
-            <FileList curPath={curPath} list={fileList || []}/>
+            <FileListGrid curPath={curPath} list={remoteList || []}/>
             <UploadBox />
         </div>
     </div>

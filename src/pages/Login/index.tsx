@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router';
 import { FaUserAlt, FaKey } from 'react-icons/fa'
 
 import { userLogin } from 'lib/action/user';
+import log from 'loglevel';
 
 const page = () => {
     let navigate = useNavigate()
@@ -11,7 +12,7 @@ const page = () => {
 
     const onLogin = async () => {
         if (username.length < 1 || password.length < 1) {
-            console.log("error");
+            log.error("Please input username and password.");
             return;
         }
 

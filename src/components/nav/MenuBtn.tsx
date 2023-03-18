@@ -1,4 +1,4 @@
-import { useState, useSyncExternalStore } from "react"
+import { useSyncExternalStore } from "react"
 import { clsx } from 'clsx';
 import { navMenuStateStore } from "layouts/AdminLayout/store";
 
