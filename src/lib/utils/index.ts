@@ -1,8 +1,4 @@
-export {
-    setCookie,
-    setExpireCookie,
-    splitCookieString
-} from './cookie';
+export { setCookie, setExpireCookie, splitCookieString } from './cookie';
 
 export * from './event';
 

@@ -1,42 +1,40 @@
-import { setCookie, setExpireCookie } from "lib/utils";
+import { setCookie, setExpireCookie } from 'lib/utils';
 import { getAuthInstance, authenticateLogin, checkAuthorized } from 'lib/api';
-import { COOKIE_USER, COOKIE_PWD, ActionResult} from 'lib/types';
-import { getUserInfo } from "lib/utils/user";
+import { COOKIE_USER, COOKIE_PWD, ActionResult } from 'lib/types';
+import { getUserInfo } from 'lib/utils/user';
 
+export async function userLogin(username: string, password: string): Promise<ActionResult> {
+  const result = await authenticateLogin(username, password);
 
-export async function userLogin(username: string, password:string): Promise<ActionResult> {
+  if (result.isOK()) {
+    setCookie(COOKIE_USER, username);
+    setCookie(COOKIE_PWD, result.data?.token || '');
+  }
 
-    const result = await authenticateLogin(username, password);
-
-    if (result.isOK()) {
-        setCookie(COOKIE_USER, username);
-        setCookie(COOKIE_PWD, result.data?.token || "");
-    }
-
-    return result;
+  return result;
 }
 
 export function userLogout() {
-    setExpireCookie(COOKIE_USER);
-    setExpireCookie(COOKIE_PWD);
+  setExpireCookie(COOKIE_USER);
+  setExpireCookie(COOKIE_PWD);
 }
 
 export async function checkUserAuthorized(): Promise<boolean> {
-    // get cookie from browser.
-    const {ua, up} = getUserInfo();
+  // get cookie from browser.
+  const { ua, up } = getUserInfo();
 
-    if (ua !== undefined && up !== undefined) {
-        // send token to api server, if response 401 then set cookie expired.
-        const instance = getAuthInstance(ua, up);
+  if (ua !== undefined && up !== undefined) {
+    // send token to api server, if response 401 then set cookie expired.
+    const instance = getAuthInstance(ua, up);
 
-        const result = await checkAuthorized(instance);
-        if (!result.isOK())  {
-            setExpireCookie(COOKIE_USER);
-            setExpireCookie(COOKIE_PWD);
-        }
-
-        return true;
+    const result = await checkAuthorized(instance);
+    if (!result.isOK()) {
+      setExpireCookie(COOKIE_USER);
+      setExpireCookie(COOKIE_PWD);
     }
 
-    return false;
+    return true;
+  }
+
+  return false;
 }

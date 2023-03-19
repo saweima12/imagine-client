@@ -1,11 +1,6 @@
-export const COOKIE_USER = "_cua";
-export const COOKIE_PWD = "_cpwd"
+export const COOKIE_USER = '_cua';
+export const COOKIE_PWD = '_cpwd';
 
-export { 
-    ActionResult,
-} from './response';
+export { ActionResult } from './response';
 
-export type {
-    SysInfo,
-    DiskInfo
-} from './sysinfo'
+export type { SysInfo, DiskInfo } from './sysinfo';

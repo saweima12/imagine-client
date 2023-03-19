@@ -1,52 +1,58 @@
-import { createDirectory } from "lib/action/webdav";
-import log from "loglevel";
-import { ChangeEvent, useSyncExternalStore } from "react";
-import { filePageInfoStore } from "../store";
+import { ChangeEvent, useSyncExternalStore } from 'react';
+import { filePageInfoStore } from '../store';
 import { FaFolderPlus } from 'react-icons/fa';
 
+const ToolBar = () => {
+  const filePageInfo = useSyncExternalStore(
+    filePageInfoStore.subscribe,
+    filePageInfoStore.getState,
+  );
 
-export default () => {
+  const onSelectFile = (e: ChangeEvent) => {
+    const files = (e.target as HTMLInputElement).files;
+    // if (!files)
+    //     return;
 
-    const filePageInfo = useSyncExternalStore(filePageInfoStore.subscribe, filePageInfoStore.getState)
+    // const file = files[0];
 
-    const onSelectFile = (e: ChangeEvent) => {
-        const files = (e.target as HTMLInputElement).files;
-        // if (!files) 
-        //     return;
+    // selectedFileListStore.setState([ file ]);
+  };
 
-        // const file = files[0];
+  const onNewFolder = async () => {
+    const item = document.getElementById('test');
+    item?.click();
 
-        // selectedFileListStore.setState([ file ]);
-        
-    }
+    // const client = filePageInfo.davClient;
+    // if (client) {
+    //     // await createDirectory(client, "/webdav/abcdc");
+    //     const selectedList = selectedFileListStore.getState()
+    //     log.debug(selectedList);
 
-    const onNewFolder = async () => {
-        const item = document.getElementById("test")
-        item?.click();
+    //     selectedList.forEach(async (item) => {
+    //         let buffer = await item.arrayBuffer();
+    //         await client.putFileContents(`/webdav/${item.name}`, buffer)
+    //     })
+    // }
+  };
 
-        // const client = filePageInfo.davClient;
-        // if (client) {
-        //     // await createDirectory(client, "/webdav/abcdc");
-        //     const selectedList = selectedFileListStore.getState()
-        //     log.debug(selectedList);          
+  return (
+    <section className='mb-4 toolbar-wrapper'>
+      <div className='toolbar-container'>
+        <input type='file' className='hidden' id='test' onChange={onSelectFile} multiple></input>
 
-        //     selectedList.forEach(async (item) => {
-        //         let buffer = await item.arrayBuffer();
-        //         await client.putFileContents(`/webdav/${item.name}`, buffer)
-        //     })
-        // }
-    }
+        <button
+          className='flex p-1 justify-center items-center create-folder-btn'
+          onClick={onNewFolder}
+        >
+          <div className='icon'>
+            <FaFolderPlus />
+          </div>
 
-    return <section className="mb-4 toolbar-wrapper">
-        <div className="toolbar-container">
-            <input type="file" className="hidden" id="test" onChange={onSelectFile} multiple></input>
-
-            <button className="flex p-1 items-center border" onClick={onNewFolder}>
-                <div className="mr-2 icon">
-                    <FaFolderPlus />
-                </div>
-                New Folder</button>
-
-        </div>
+          <span className='ml-2 hidden md:flex'>New Folder</span>
+        </button>
+      </div>
     </section>
+  );
 };
+
+export default ToolBar;

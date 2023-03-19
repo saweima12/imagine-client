@@ -1,8 +1,9 @@
-import { FaFolder, FaFile } from "react-icons/fa";
+import { FaFolder, FaFile } from 'react-icons/fa';
 
-export default ( { type } : { type:string }) => {
-
-    return <span className="flex self-center mr-2 icon">
-        {type == "directory" ? <FaFolder /> : <FaFile />}
+export default ({ type }: { type: string }) => {
+  return (
+    <span className='flex self-center mr-2 icon'>
+      {type == 'directory' ? <FaFolder /> : <FaFile />}
     </span>
-}
+  );
+};

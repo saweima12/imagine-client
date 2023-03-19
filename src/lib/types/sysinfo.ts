@@ -1,9 +1,9 @@
 export interface DiskInfo {
-    free: number,
-    all: number,
-    usage: number,
+  free: number;
+  all: number;
+  usage: number;
 }
 
-export interface SysInfo{
-    disk?: DiskInfo
+export interface SysInfo {
+  disk?: DiskInfo;
 }
