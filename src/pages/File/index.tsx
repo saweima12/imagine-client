@@ -1,6 +1,5 @@
 import type { FileStat } from 'webdav';
-import log from 'loglevel';
-import { useMemo, useState } from 'react';
+import { lazy, useMemo, useState } from 'react';
 import { useLocation } from 'react-router';
 import { useQuery } from 'react-query';
 
@@ -9,11 +8,11 @@ import { getUserInfo } from 'lib/utils/user';
 import { getClient } from 'lib/webdav';
 
 import { checkedListStore, filePageInfoStore } from './store';
-import FileListGrid from './component/FileListGrid';
 import Toolbar from './component/Toolbar';
-import UploadBox from './component/UploadBox';
 import Breadcrumb from './component/Breadcrumb';
 
+const UploadBox = lazy(() => import("./component/UploadBox"));
+const FileListGrid = lazy(() => import("./component/FileListGrid"));
 
 const page = () => {
     // process query path.
@@ -30,27 +29,23 @@ const page = () => {
     }, [location.pathname])
     // declare state
     const [remoteList, setRemoteList] = useState<FileStat[]>();
-    const [uploadQueue, setUploadQueue] = useState<string[]>();
 
     // get directory content from webdav.
     const load = async () => await action.getDirectoryContents(client, curPath);
-    const refreshList = () => checkedListStore.setState([]);
+    const clearCheckedList = () => checkedListStore.setState([]);
 
     // Query directory content from webdav.
     const { isLoading } = useQuery(["loadDirectoryContent", curPath], load, {
-        onSuccess: (result) => { 
-            log.debug(result);
-
+        onSuccess: (result) => {
             setRemoteList(result.data);
             // reset checkedList
-            refreshList();
+            clearCheckedList();
 
             // set filepage store.
             filePageInfoStore.setState({
                 curPath: curPath,
                 davClient: client
-            })
-            
+            });
         },
     })
 

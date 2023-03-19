@@ -2,10 +2,12 @@ import { redirect } from 'react-router'
 import { createHashRouter } from 'react-router-dom';
 
 import { checkUserAuthorized, userLogout } from 'lib/action/user';
-
+import { lazy } from 'react';
 import AdminLayout from 'layouts/AdminLayout';
-import FilePage from 'pages/File'
-import LoginPage from 'pages/Login';
+
+// const AdminLayout = lazy(() => import("layouts/AdminLayout"));
+const FilePage = lazy(() => import("pages/File"));
+const LoginPage = lazy(() => import("pages/Login"));
 
 const CustomRouter = createHashRouter([
     {

@@ -1,6 +1,6 @@
 import { clsx } from "clsx";
 import { Outlet } from "react-router";
-import { useEffect, useState, useSyncExternalStore } from "react";
+import { useSyncExternalStore } from "react";
 import { useQuery } from "react-query";
 
 import { loadSysInfo } from "lib/action/dashboard";

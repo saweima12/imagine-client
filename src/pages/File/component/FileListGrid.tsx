@@ -1,10 +1,9 @@
-import moment from "moment";
 import { ChangeEvent, useMemo, useSyncExternalStore } from "react";
 import { NavLink } from "react-router-dom";
 import { FileStat } from "webdav";
 
 import { formatSizeString } from "lib/utils";
-
+import dayjs from 'dayjs';
 import FileListIcon from "./FileListIcon";
 import { checkedListStore } from "../store";
 
@@ -89,7 +88,7 @@ export default ({ curPath, list }: { curPath: string, list: FileStat[] } ) => {
                         }
 
                     </div>
-                    <div className="lastmod">{moment(item.lastmod).format("YYYY-MM-DD HH:mm")}</div>
+                    <div className="lastmod">{dayjs(item.lastmod).format("YYYY-MM-DD HH:mm")}</div>
                     <div className="size">{formatSizeString(item.size)}</div>
                 </div>        
             )

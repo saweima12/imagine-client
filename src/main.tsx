@@ -1,9 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
+import log  from 'loglevel';
 import App from './App'
 import './index.css'
-
-import log  from 'loglevel';
 
 if (import.meta.env.MODE == "development") {
   log.setLevel(log.levels.DEBUG);
