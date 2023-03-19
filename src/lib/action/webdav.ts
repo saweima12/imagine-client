@@ -1,5 +1,5 @@
 import { ActionResult } from 'lib/types';
-import { WebDAVClient, FileStat, ResponseDataDetailed } from 'webdav';
+import { WebDAVClient, FileStat } from 'webdav';
 
 function davRoute(path: string) {
   return `${import.meta.env['VITE_WEBDAV_PATH']}${path}`;
@@ -20,12 +20,13 @@ export async function getDirectoryContents(
 export async function createDirectory(client: WebDAVClient, path: string) {
   return await client
     .createDirectory(path, { recursive: false })
-    .then((response) => ActionResult.New({ status: 200 }))
+    .then((_) => ActionResult.New({ status: 200 }))
     .catch((err: any) => ActionResult.New({ status: err.status, msg: err.message }));
 }
 
 export async function putFile(client: WebDAVClient, file: File) {
-  // return await client.putFileContents()
+  // TODO: Add putfile function.
+  console.log(client, file);
 }
 
 export default {

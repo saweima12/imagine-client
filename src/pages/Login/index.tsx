@@ -5,7 +5,7 @@ import { FaUserAlt, FaKey } from 'react-icons/fa';
 import { userLogin } from 'lib/action/user';
 import log from 'loglevel';
 
-const page = () => {
+const LoginPage = () => {
   const navigate = useNavigate();
   const [username, setUsername] = React.useState('');
   const [password, setPassword] = React.useState('');
@@ -63,4 +63,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default LoginPage;

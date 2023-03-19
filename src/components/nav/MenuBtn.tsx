@@ -2,7 +2,7 @@ import { useSyncExternalStore } from 'react';
 import { clsx } from 'clsx';
 import { navMenuStateStore } from 'layouts/AdminLayout/store';
 
-export default () => {
+const MenuBtn = () => {
   const navMenuState = useSyncExternalStore(
     navMenuStateStore.subscribe,
     navMenuStateStore.getState,
@@ -14,10 +14,19 @@ export default () => {
   };
 
   return (
-    <div className={clsx('menu-button-wrapper', navMenuState && 'toggle')} onClick={onToggle}>
+    <div
+      className={clsx('menu-button-wrapper', navMenuState && 'toggle')}
+      onClick={onToggle}
+      tabIndex={0}
+      onKeyDown={onToggle}
+      aria-hidden={true}
+      role='button'
+    >
       <div className='menu-button-container'>
         <div className='menu-button'></div>
       </div>
     </div>
   );
 };
+
+export default MenuBtn;

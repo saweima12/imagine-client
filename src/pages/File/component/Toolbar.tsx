@@ -1,15 +1,9 @@
-import { ChangeEvent, useSyncExternalStore } from 'react';
-import { filePageInfoStore } from '../store';
+import { ChangeEvent } from 'react';
 import { FaFolderPlus } from 'react-icons/fa';
 
 const ToolBar = () => {
-  const filePageInfo = useSyncExternalStore(
-    filePageInfoStore.subscribe,
-    filePageInfoStore.getState,
-  );
-
   const onSelectFile = (e: ChangeEvent) => {
-    const files = (e.target as HTMLInputElement).files;
+    console.log(e);
     // if (!files)
     //     return;
 

@@ -3,7 +3,7 @@ export enum EventCode {
 }
 
 export class EventEmitter {
-  public static _event: Record<string, Array<Function>> = {};
+  public static _event: Record<string, Array<any>> = {};
 
   public static dispatch(eventCode: string, params?: unknown) {
     if (!(eventCode in this._event)) return;
@@ -12,12 +12,12 @@ export class EventEmitter {
     handlers.forEach((handler) => handler(params));
   }
 
-  public static subscribe(eventCode: string, handler: Function) {
+  public static subscribe(eventCode: string, handler: any) {
     if (!(eventCode in this._event)) this._event[eventCode] = [];
     this._event[eventCode].push(handler);
   }
 
-  public static unsubscribe(eventCode: string, handler: Function) {
+  public static unsubscribe(eventCode: string, handler: any) {
     if (!(eventCode in this._event)) return;
 
     const pub = this._event[eventCode];

@@ -1,6 +1,6 @@
 import DiskSpaceWidget from './DiskSpaceWidget';
 
-const drawer = () => {
+const NavMenu = () => {
   return (
     <aside className='pt-20 nav-menu'>
       <div className='disk-info'>
@@ -10,4 +10,4 @@ const drawer = () => {
   );
 };
 
-export default drawer;
+export default NavMenu;

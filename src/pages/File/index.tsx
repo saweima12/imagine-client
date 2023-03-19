@@ -14,7 +14,7 @@ import Breadcrumb from './component/Breadcrumb';
 const UploadBox = lazy(() => import('./component/UploadBox'));
 const FileListGrid = lazy(() => import('./component/FileListGrid'));
 
-const page = () => {
+const FilePage = () => {
   // process query path.
   const location = useLocation();
 
@@ -65,4 +65,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default FilePage;

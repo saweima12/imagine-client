@@ -2,7 +2,7 @@ import { SetStateAction } from 'react';
 
 export const createStore = <T>(initialState: T) => {
   let state: T = initialState;
-  const listeners: Set<Function> = new Set();
+  const listeners: Set<any> = new Set();
 
   const getState = () => state;
   const setState = (fn: SetStateAction<T>) => {
@@ -21,7 +21,7 @@ export const createStore = <T>(initialState: T) => {
     return () => listeners.delete(handler);
   };
 
-  const unSubscribe = (handler: Function) => {
+  const unSubscribe = (handler: unknown) => {
     listeners.delete(handler);
   };
 

@@ -7,7 +7,7 @@ import { formatSizeString } from 'lib/utils';
 import FileListIcon from './FileListIcon';
 import { checkedListStore } from '../store';
 
-const grid = ({ curPath, list }: { curPath: string; list: FileStat[] }) => {
+const FileListGrid = ({ curPath, list }: { curPath: string; list: FileStat[] }) => {
   // sort file list by type and remove it self.
   // rule: folder first
   const fileList = useMemo(() => {
@@ -17,7 +17,7 @@ const grid = ({ curPath, list }: { curPath: string; list: FileStat[] }) => {
     return temp.slice().sort((a, b) => {
       return getPriority(b.type) - getPriority(a.type);
     });
-  }, [list]);
+  }, [curPath, list]);
 
   // declare state.
   const checkedList = useSyncExternalStore(checkedListStore.subscribe, checkedListStore.getState);
@@ -86,4 +86,4 @@ const grid = ({ curPath, list }: { curPath: string; list: FileStat[] }) => {
   );
 };
 
-export default grid;
+export default FileListGrid;

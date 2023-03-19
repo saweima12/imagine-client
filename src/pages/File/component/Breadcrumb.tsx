@@ -12,7 +12,7 @@ interface CrumbItem {
   path: string;
 }
 
-export default ({ curPath }: BreadCrumbParams) => {
+const BreadCrumb = ({ curPath }: BreadCrumbParams) => {
   const crumbs: Array<CrumbItem> = [];
   const helper = FileViewRouter();
 
@@ -62,3 +62,5 @@ export default ({ curPath }: BreadCrumbParams) => {
     </div>
   );
 };
+
+export default BreadCrumb;

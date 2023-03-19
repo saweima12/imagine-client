@@ -4,7 +4,7 @@ import { formatSizeString } from 'lib/utils';
 import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from 'react';
 import { sysInfoStore } from 'layouts/AdminLayout/store';
 
-export default () => {
+const DiskSapceWidget = () => {
   const sysInfo = useSyncExternalStore(sysInfoStore.subscribe, sysInfoStore.getState);
 
   const maxProgressElm = useRef<HTMLDivElement>();
@@ -12,12 +12,12 @@ export default () => {
   const percent = useMemo(() => {
     if (sysInfo.disk) return Math.round((sysInfo.disk.usage / sysInfo.disk.all) * 100);
     return 1;
-  }, [sysInfo.disk?.usage]);
+  }, [sysInfo.disk]);
 
   const usage_str = useMemo(() => {
     if (sysInfo.disk) return formatSizeString(sysInfo.disk.usage);
     return 0;
-  }, [sysInfo.disk?.usage]);
+  }, [sysInfo.disk]);
 
   const [curProgressWidth, setCurProgressWidth] = useState(0);
 
@@ -43,3 +43,5 @@ export default () => {
     </div>
   );
 };
+
+export default DiskSapceWidget;

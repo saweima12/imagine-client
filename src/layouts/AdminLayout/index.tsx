@@ -11,7 +11,7 @@ import NavMenu from 'components/nav/Navmenu';
 import NavBar from 'components/nav/Navbar';
 import MenuMask from 'components/MenuMask';
 
-const layout = () => {
+const AdminLayout = () => {
   const navMenuState = useSyncExternalStore(
     navMenuStateStore.subscribe,
     navMenuStateStore.getState,
@@ -39,4 +39,4 @@ const layout = () => {
   );
 };
 
-export default layout;
+export default AdminLayout;

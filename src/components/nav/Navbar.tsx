@@ -2,7 +2,7 @@ import MenuBtn from './MenuBtn';
 import { NavLink } from 'react-router-dom';
 import { FaFile, FaSignOutAlt } from 'react-icons/fa';
 
-export default () => {
+const Navbar = () => {
   return (
     <nav className='top-navbar'>
       <div className='flex py-2 navbar-container'>
@@ -40,3 +40,5 @@ export default () => {
     </nav>
   );
 };
+
+export default Navbar;
