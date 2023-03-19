@@ -1,10 +1,12 @@
 import { createStore } from "lib/utils/store";
+import { WebDAVClient } from "webdav";
 
-interface DirectoryPathInfo {
+interface FilePageInfo {
     curPath?: string
-    davPath?: string   
+    davClient?: WebDAVClient
 }
 
 
 export const checkedListStore = createStore<Array<string>>([]);
-export const directoryPathStore = createStore<DirectoryPathInfo>({});
+export const filePageInfoStore = createStore<FilePageInfo>({});
+export const selectedFileListStore = createStore<File[]>([]);
