@@ -60,27 +60,31 @@ const FileListGrid = ({ curPath, list }: { curPath: string; list: FileStat[] }) 
       </div>
 
       <div className='filelist-body'>
-        {fileList.map((item) => (
-          <div className='flex row' key={item.filename}>
-            <div className='multi-check'>
-              <input
-                type='checkbox'
-                checked={checkedList.includes(item.filename)}
-                onChange={(e) => onChangeItem(e, item)}
-              ></input>
+        {fileList.length > 0 ? (
+          fileList.map((item) => (
+            <div className='flex row' key={item.filename}>
+              <div className='multi-check'>
+                <input
+                  type='checkbox'
+                  checked={checkedList.includes(item.filename)}
+                  onChange={(e) => onChangeItem(e, item)}
+                ></input>
+              </div>
+              <div className='flex file-name'>
+                <FileListIcon type={item.type} />
+                {item.type == 'directory' ? (
+                  <NavLink to={`${item.filename.replace(/^\//, '')}`}>{item.basename}</NavLink>
+                ) : (
+                  <p>{item.basename}</p>
+                )}
+              </div>
+              <div className='lastmod'>{dayjs(item.lastmod).format('YYYY-MM-DD HH:mm')}</div>
+              <div className='size'>{formatSizeString(item.size)}</div>
             </div>
-            <div className='flex file-name'>
-              <FileListIcon type={item.type} />
-              {item.type == 'directory' ? (
-                <NavLink to={`${item.filename.replace(/^\//, '')}`}>{item.basename}</NavLink>
-              ) : (
-                <p>{item.basename}</p>
-              )}
-            </div>
-            <div className='lastmod'>{dayjs(item.lastmod).format('YYYY-MM-DD HH:mm')}</div>
-            <div className='size'>{formatSizeString(item.size)}</div>
-          </div>
-        ))}
+          ))
+        ) : (
+          <div className='flex h-10 items-center justify-center '>Empty</div>
+        )}
       </div>
     </div>
   );
